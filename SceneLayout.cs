@@ -6,6 +6,7 @@ using System.Reflection;
 using UnityEngine;
 using VNENGINE;
 using System.Linq;
+using Unity.VisualScripting;
 
 namespace PointClick
 {
@@ -16,7 +17,7 @@ namespace PointClick
         private string label = string.Empty;
         private string image = string.Empty;
         private bool hasBack = false, hasLeft = false, hasRight = false, hasForward = false;
-        private Dictionary<string, float[]> hotSpots;
+        private List<List<int>> hotSpots;
         private List<string> places;
         private List<string> items;
 
@@ -40,7 +41,7 @@ namespace PointClick
                 var place = places[i];
                 var hotspot = hotSpots[i];
 
-                this.hotSpots.Add(place, hotspot);
+                //this.hotSpots.Add(place, hotspot);
             }
         }
 
@@ -72,7 +73,16 @@ namespace PointClick
                         prop.SetValue(this, tmpstr);
                     }
                     else if (item == "hotSpots")
-                        prop.SetValue(this, (Dictionary<string, float[]>)data[item]);
+                    {
+                        List<List<object>> tmpobj = (List<List<object>>)data[item];
+                        List<List<int>> tmpspots = new();
+                        foreach (var tmpspot in tmpobj)
+                        {
+                            List<int> tmp = tmpspot.Select(i => (int)i).ToList();
+                            tmpspots.Add(tmp);
+                        }
+                        prop.SetValue(this, tmpspots);
+                    }
                     else
                         prop.SetValue(this, data[item]);
                 }

@@ -22,7 +22,7 @@ public class SceneManager : MonoBehaviour
         Debug.Log(string.Join("\n", gameFile));
         object data = DiagJson.Deserialize(string.Join("\n",gameFile));
 
-        ParseGameFile((Dictionary<string, object>) data);
+//        ParseGameFile((Dictionary<string, object>) data);
     }
 
     // Update is called once per frame

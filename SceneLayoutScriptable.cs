@@ -12,8 +12,9 @@ namespace PointClick
     [System.Serializable]
     public struct HotSpot
     {
-        public string name;
-        public int xmin, ymin, xmax, ymax;
+        public string name, destination;
+        public float xmin, ymin,
+            xsize, ysize;
     }
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Place", order = 1)]
@@ -25,7 +26,6 @@ namespace PointClick
         public Texture image;
         public bool hasBack = false, hasLeft = false, hasRight = false, hasForward = false;
         public List<HotSpot> hotSpots;
-        public List<string> places;
         public List<string> items;
 
         public SceneLayoutScriptable(string name, Texture image, string description = "", List<string> places = null, float[][] hotSpots = null)
