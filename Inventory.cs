@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory<T>
 {
-    private Dictionary<T, int> inventory = new();
+    static private Dictionary<T, int> inventory;// = new();
     /*
     public static Inventory<T> Instance = null;
     public void Awake()
@@ -12,7 +12,10 @@ public class Inventory<T>
         if (Instance == null)
             Instance = this;
     }*/
-
+    public Inventory()
+    {
+        inventory = new();
+    }
     public void Push(T item)
     {
         if (!inventory.ContainsKey(item))
